@@ -1,0 +1,537 @@
+openapi: 3.0.0
+info:
+  x-skaffolder-id-project: 5e50007852a8e9561a0ce585
+  title: ToDoItAll
+  description: You can obtain JWT token from login API
+  version: 0.1
+servers:
+  - url: http://localhost:3000/api
+    description: Local server for testing
+paths:
+  /login:
+    post:
+      x-skaffolder-ignore: true
+      summary: Login API
+      security: []
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              example:
+                username: admin
+                password: 62f264d7ad826f02a8af714c0a54b197935b717656b80461686d450f7b3abde4c553541515de2052b9af70f710f0cd8a1a2d3f4d60aa72608d71a63a9a93c0f5
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /verifyToken:
+    post:
+      x-skaffolder-ignore: true
+      summary: Verify token API
+      security: []
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /changePassword:
+    post:
+      x-skaffolder-ignore: true
+      summary: Change password API
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passwordNew:
+                  type: string
+                passwordOld:
+                  type: string
+      responses:
+        "200":
+          description: OK
+  /todo:
+    post:
+      x-skaffolder-id: 5e50010a52a8e9561a0ce601
+      x-skaffolder-name: create
+      x-skaffolder-id-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-resource: ToDo
+      x-skaffolder-crudAction: create
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION create
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION create
+      tags:
+        - ToDo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToDo"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Body:
+                  type: object
+                duedate:
+                  type: integer
+                responsible:
+                  type: string
+                subject:
+                  type: string
+    get:
+      x-skaffolder-id: 5e50010b52a8e9561a0ce608
+      x-skaffolder-name: list
+      x-skaffolder-id-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-resource: ToDo
+      x-skaffolder-crudAction: list
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION list
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION list
+      tags:
+        - ToDo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ToDo"
+  "/todo/{id}":
+    delete:
+      x-skaffolder-id: 5e50010b52a8e9561a0ce607
+      x-skaffolder-name: delete
+      x-skaffolder-id-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-resource: ToDo
+      x-skaffolder-crudAction: delete
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION delete
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION delete
+      tags:
+        - ToDo
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      x-skaffolder-id: 5e50010b52a8e9561a0ce604
+      x-skaffolder-name: get
+      x-skaffolder-id-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-resource: ToDo
+      x-skaffolder-crudAction: get
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION get
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION get
+      tags:
+        - ToDo
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToDo"
+    post:
+      x-skaffolder-id: 5e50010a52a8e9561a0ce602
+      x-skaffolder-name: update
+      x-skaffolder-id-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-resource: ToDo
+      x-skaffolder-crudAction: update
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION update
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION update
+      tags:
+        - ToDo
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToDo"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToDo"
+  "/user/{id}/changePassword":
+    post:
+      x-skaffolder-id: 5e50007852a8e9561a0ce598
+      x-skaffolder-name: changePassword
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: 
+      x-skaffolder-crudType: 
+      x-skaffolder-description: Change password of user from admin
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: object
+      x-skaffolder-url: /{id}/changePassword
+      x-skaffolder-roles:
+        - 5e50007852a8e9561a0ce591
+      summary: Change password of user from admin
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+  /user:
+    post:
+      x-skaffolder-id: 5e50007852a8e9561a0ce597
+      x-skaffolder-name: create
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: create
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION create
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION create
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+                roles:
+                  type: string
+                surname:
+                  type: string
+                username:
+                  type: string
+    get:
+      x-skaffolder-id: 5e50007852a8e9561a0ce592
+      x-skaffolder-name: list
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: list
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION list
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION list
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  "/user/{id}":
+    delete:
+      x-skaffolder-id: 5e50007852a8e9561a0ce593
+      x-skaffolder-name: delete
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: delete
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION delete
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION delete
+      tags:
+        - User
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      x-skaffolder-id: 5e50007852a8e9561a0ce599
+      x-skaffolder-name: get
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: get
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION get
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION get
+      tags:
+        - User
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    post:
+      x-skaffolder-id: 5e50007852a8e9561a0ce594
+      x-skaffolder-name: update
+      x-skaffolder-id-resource: 5e50007852a8e9561a0ce58f
+      x-skaffolder-resource: User
+      x-skaffolder-crudAction: update
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION update
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION update
+      tags:
+        - User
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ToDo:
+      x-skaffolder-id: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-id-db: 5e50007852a8e9561a0ce586
+      x-skaffolder-id-entity: 5e5000d252a8e9561a0ce5f9
+      x-skaffolder-url: /todo
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        Body:
+          type: object
+          x-skaffolder-id-attr: 5e50010a52a8e9561a0ce5ff
+          x-skaffolder-type: Custom
+        duedate:
+          type: integer
+          x-skaffolder-id-attr: 5e50010a52a8e9561a0ce5fe
+          x-skaffolder-type: Date
+          x-skaffolder-required: true
+        responsible:
+          type: string
+          x-skaffolder-id-attr: 5e50010a52a8e9561a0ce5fd
+          x-skaffolder-type: String
+          x-skaffolder-required: true
+        subject:
+          type: string
+          x-skaffolder-id-attr: 5e5000d252a8e9561a0ce5fa
+          x-skaffolder-type: String
+          x-skaffolder-required: true
+      x-skaffolder-relations: 
+      required:
+        - _id
+        - duedate
+        - responsible
+        - subject
+    User:
+      x-skaffolder-id: 5e50007852a8e9561a0ce58f
+      x-skaffolder-id-db: 5e50007852a8e9561a0ce586
+      x-skaffolder-id-entity: 5e50007852a8e9561a0ce587
+      x-skaffolder-url: /user
+      x-skaffolder-type: User
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        mail:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce58a
+          x-skaffolder-type: String
+        name:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce58b
+          x-skaffolder-type: String
+        password:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce589
+          x-skaffolder-type: String
+          x-skaffolder-required: true
+        roles:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce58d
+          x-skaffolder-type: String
+        surname:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce58c
+          x-skaffolder-type: String
+        username:
+          type: string
+          x-skaffolder-id-attr: 5e50007852a8e9561a0ce588
+          x-skaffolder-type: String
+          x-skaffolder-required: true
+      x-skaffolder-relations: 
+      required:
+        - _id
+        - password
+        - username
+  x-skaffolder-db:
+    - x-skaffolder-id: 5e50007852a8e9561a0ce586
+      x-skaffolder-name: ToDoItAll_db
+  x-skaffolder-page:
+    - x-skaffolder-id: 5e50007852a8e9561a0ce58e
+      x-skaffolder-name: Home
+      x-skaffolder-url: /home
+      x-skaffolder-template: 
+      x-skaffolder-resource: 
+      x-skaffolder-services: 
+      x-skaffolder-nesteds: 
+      x-skaffolder-links:
+        - 5e50010b52a8e9561a0ce606
+      x-skaffolder-roles: []
+    - x-skaffolder-id: 5e50010a52a8e9561a0ce600
+      x-skaffolder-name: ToDoEdit
+      x-skaffolder-url: /todos/{id}
+      x-skaffolder-template: Edit_Crud
+      x-skaffolder-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-services:
+        - 5e50010a52a8e9561a0ce601
+        - 5e50010a52a8e9561a0ce602
+        - 5e50010b52a8e9561a0ce604
+      x-skaffolder-nesteds: 
+      x-skaffolder-links: 
+      x-skaffolder-roles: []
+    - x-skaffolder-id: 5e50010b52a8e9561a0ce606
+      x-skaffolder-name: ToDoList
+      x-skaffolder-url: /todos
+      x-skaffolder-template: List_Crud
+      x-skaffolder-resource: 5e5000d252a8e9561a0ce5fb
+      x-skaffolder-services:
+        - 5e50010b52a8e9561a0ce607
+        - 5e50010b52a8e9561a0ce608
+      x-skaffolder-nesteds: 
+      x-skaffolder-links:
+        - 5e50010a52a8e9561a0ce600
+      x-skaffolder-roles: []
+  x-skaffolder-roles: 
+    - x-skaffolder-id: 5e50007852a8e9561a0ce591
+      x-skaffolder-name: ADMIN
